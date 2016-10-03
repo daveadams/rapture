@@ -484,6 +484,22 @@ _rapture_cmd_alias_rm() {
 _rapture_cmd_alias() {
     if [[ -z $1 ]]; then
         cat >&2 <<USAGE
+Usage: rapture alias <command> [<args> ... ]
+
+Commands:
+
+  ls
+    lists all currently defined aliases
+
+  set <alias> <arn>
+    creates or updates an alias named <alias> for the value <arn>
+
+  rm <alias>
+    removes the alias <alias>
+
+  <alias>
+    prints the value of <arn> for alias <alias>
+
 USAGE
         return 1
     fi
