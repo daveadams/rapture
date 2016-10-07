@@ -8,14 +8,21 @@ Rapture is a bash CLI tool for managing and switching between AWS IAM roles.
     $ rapture whoami
     arn:aws:iam::999988887777:user/janesmith
 
-    $ rapture assume arn:aws:iam::000011110000:role/another-role
-    rapture: Assumed 'another-role' in account 000011110000
+    $ rapture alias set admin arn:aws:iam::000011110000:role/admin-power
+    rapture: alias 'admin' was set to 'arn:aws:iam::000011110000:role/admin-power'
+
+    $ rapture alias ls
+    admin      arn:aws:iam::000011110000:role/admin-power
+    marketing  arn:aws:iam::302830283028:role/marketing-access
+
+    $ rapture assume admin
+    rapture: Assumed assumed-role admin-power in account 000011110000
 
     $ rapture whoami
-    arn:aws:sts::000011110000:assumed-role/another-role/rapture-janesmith
+    arn:aws:sts::000011110000:assumed-role/admin-power/rapture-janesmith
 
     $ rapture resume
-    rapture: Resumed user 'janesmith' in account 999988887777
+    rapture: Resumed user janesmith in account 999988887777
 
     $ rapture whoami
     arn:aws:iam::999988887777:user/janesmith
