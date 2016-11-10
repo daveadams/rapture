@@ -421,7 +421,25 @@ _rapture_cmd_account_rm() {
 
 _rapture_cmd_account() {
     if [[ -z $1 ]]; then
-        # todo print usage
+        cat >&2 <<USAGE
+Usage: rapture account <command> [<args> ... ]
+
+Commands:
+
+  ls
+    lists all currently defined accounts
+
+  set <account> <id>
+    creates or updates an account named <account> for the value <id>
+
+  rm <account>
+    removes the account <account>
+
+  <account>
+    prints the value of <id> for alias <account>
+
+USAGE
+
         return 1
     fi
 
