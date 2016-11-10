@@ -3,6 +3,8 @@ declare -a _rapture_creds_stack
 declare -a _rapture_arn_stack
 declare -A _rapture_alias
 declare -A _rapture_account
+declare -A _rapture_alias_r
+declare -A _rapture_account_r
 
 _rapture_quiet() { [[ ${_rapture[quiet]} == true ]]; }
 
@@ -60,6 +62,7 @@ _rapture_load_config() {
     local key val
     while read key val; do
         _rapture_account[$key]="$val"
+        _rapture_account_r[$val]="$key"
     done < <( jq -r 'to_entries[]|.key + " " + .value' "${_rapture[accounts]}" )
 
     ######################################################################
@@ -74,6 +77,7 @@ _rapture_load_config() {
 
     while read key val; do
         _rapture_alias[$key]="$val"
+        _rapture_alias_r[$val]="$key"
     done < <( jq -r 'to_entries[]|.key + " " + .value' "${_rapture[aliases]}" )
 }
 _rapture_load_config
@@ -399,6 +403,7 @@ _rapture_cmd_account_add() {
 
 _rapture_cmd_account_set() {
     _rapture_account[$1]="$2"
+    _rapture_account_r[$2]="$1"
     _rapture_save_accounts
     _rapture_msg "account '$1' was set to '$2'"
 }
@@ -408,6 +413,7 @@ _rapture_cmd_account_rm() {
         _rapture_err "account '$1' is not defined"
         return 1
     fi
+    unset _rapture_account_r[${_rapture_account[$1]}]
     unset _rapture_account[$1]
     _rapture_save_accounts
     _rapture_msg "account '$1' has been removed"
@@ -467,6 +473,7 @@ _rapture_cmd_alias_add() {
 
 _rapture_cmd_alias_set() {
     _rapture_alias[$1]="$2"
+    _rapture_alias_r[$2]="$1"
     _rapture_save_aliases
     _rapture_msg "alias '$1' was set to '$2'"
 }
@@ -476,6 +483,7 @@ _rapture_cmd_alias_rm() {
         _rapture_err "alias '$1' is not defined"
         return 1
     fi
+    unset _rapture_alias_r[${_rapture_alias[$1]}]
     unset _rapture_alias[$1]
     _rapture_save_aliases
     _rapture_msg "alias '$1' has been removed"
