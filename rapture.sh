@@ -18,7 +18,7 @@ _rapture_msg() { _rapture_quiet || echo "rapture: $@" >&2; }
 _rapture_err() { echo "rapture: ERROR: $@" >&2; }
 
 _rapture_load_config() {
-    _rapture[VERSION]=1.0.0
+    _rapture[VERSION]=1.1.0
     _rapture[srcdir]=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
     _rapture[rootdir]="${RAPTURE_ROOT:-${_rapture[srcdir]}}"
     _rapture[sp]="${_rapture[sp]:-0}"
