@@ -1,0 +1,3 @@
+* reverse lookup assoc arrays for aliases and accounts
+* convert expiration to a timestamp, report on how long till expiration in whoami
+* report alias, arn, timeout in whoami output

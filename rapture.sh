@@ -303,6 +303,9 @@ Commands:
   account
     manages account aliases
 
+  init <vault-name>
+    re-initializes environment from Vaulted vault <vault-name>
+
   version
     prints the current version
 
@@ -556,11 +559,23 @@ _rapture_cmd_version() {
     echo "Rapture ${_rapture[VERSION]}"
 }
 
+_rapture_cmd_init() {
+    if ! which vaulted &>/dev/null; then
+        _rapture_err "'vaulted' was not found in your path. Install it with 'go get github.com/miquella/vaulted'."
+    fi
+
+    echo "Initializing vaulted env '$1':"
+    eval $( vaulted env "$1" )
+    _rapture[sp]=0
+    _rapture_load_config
+    _rapture_cmd_whoami
+}
+
 rapture() {
     local cmd="$1"
     shift
     case $cmd in
-        whoami|assume|resume|reload|info|stack|account|alias|version)
+        init|whoami|assume|resume|reload|info|stack|account|alias|version)
             eval "_rapture_cmd_${cmd} \"\$@\""
             ;;
 
