@@ -36,6 +36,8 @@ Rapture is a bash CLI tool for managing and switching between AWS IAM roles.
 
 ## Installation
 
+*NOTE*: If you are on OSX, you must install Bash 4. See http://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/.
+
 The recommended way to install Rapture is to clone the Github repo directly to `~/.rapture`:
 
     $ git clone https://github.com/daveadams/rapture ~/.rapture

@@ -1,3 +1,18 @@
+if [ -z "$BASH_VERSION" ]; then
+    echo
+    echo "ERROR: Rapture only works with Bash. You seem to be running a different shell." >&2
+    echo
+    return
+fi
+
+if (( ${BASH_VERSION:0:1} < 4 )); then
+    echo
+    echo "ERROR: Rapture requires Bash 4, but you are using $BASH_VERSION." >&2
+    echo "  If you are on a Mac: http://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/" >&2
+    echo
+    return
+fi
+
 declare -A _rapture
 declare -a _rapture_creds_stack
 declare -a _rapture_arn_stack
