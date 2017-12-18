@@ -59,6 +59,11 @@ Finally, open a new terminal window to verify that Rapture is automatically load
 No configuration is required to start using Rapture, but Rapture will store configuration in `config.json`, `aliases.json`, and `accounts.json` in the `~/.rapture` directory.
 
 
+## Environment Variables
+
+Rapture sets the `RAPTURE_ROLE` environment variable with the role ARN or alias of the currently-assumed role.
+
+
 ## Caveats
 
 Rapture assumes the use of `AWS_*` environment variables for determining the root identity.

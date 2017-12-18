@@ -61,7 +61,7 @@ _rapture_load_config() {
               ((.identifier//"'"$USER"'")|tostring)
             ]|join(" ")' "${_rapture[config]}" )"
 
-    _rapture[managed_vars]="AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SECURITY_TOKEN"
+    _rapture[managed_vars]="AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SECURITY_TOKEN RAPTURE_ROLE"
     _rapture[aws_cli_args]="--region ${_rapture[region]} --output json"
 
     ######################################################################
@@ -280,6 +280,7 @@ _rapture_use_assumed_identity() {
     export AWS_SECRET_ACCESS_KEY="${_rapture[assumed_secret]}"
     export AWS_SESSION_TOKEN="${_rapture[assumed_token]}"
     export AWS_SECURITY_TOKEN="${_rapture[assumed_token]}"
+    export RAPTURE_ROLE="${_rapture[role_or_alias_to_assume]}"
 
     _rapture_stash_env
     _rapture_parse_identity
@@ -349,6 +350,7 @@ _rapture_cmd_assume() {
     else
         _rapture[assume_role_arn]="$1"
     fi
+    _rapture[role_or_alias_to_assume]="$1"
 
     if ! _rapture_api_sts_assume_role \
         || ! _rapture_use_assumed_identity; then
