@@ -583,6 +583,7 @@ _rapture_cmd_init() {
 
     echo "Initializing vaulted env '$1':"
     eval "$( vaulted env "$1" )"
+    unset RAPTURE_ROLE
     _rapture[sp]=0
     _rapture_load_config
     _rapture_cmd_whoami
