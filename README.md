@@ -69,3 +69,7 @@ Rapture sets the `RAPTURE_ROLE` environment variable with the role ARN or alias 
 Rapture assumes the use of `AWS_*` environment variables for determining the root identity.
 
 Rapture does _not_ manage your secrets for you. I recommend [Vaulted](https://github.com/miquella/vaulted) for managing storing AWS access keys (and other secrets) securely in an easily manageable format and for loading them into your environment.
+
+## License
+
+This software is public domain. No rights are reserved. See LICENSE for more information.
