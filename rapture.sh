@@ -1,3 +1,5 @@
+# This software is public domain. No rights are reserved. See LICENSE for more information.
+
 if [ -z "$BASH_VERSION" ]; then
     echo
     echo "ERROR: Rapture only works with Bash. You seem to be running a different shell." >&2
