@@ -71,10 +71,12 @@ _rapture_load_config() {
     read _rapture[region] \
          _rapture[quiet] \
          _rapture[identifier] \
+         _rapture[session_duration] \
     <<< "$( jq -r '[
               (.region//"us-east-1"),
               ((.quiet//false)|tostring),
-              ((.identifier//"'"$USER"'")|tostring)
+              ((.identifier//"'"$USER"'")|tostring),
+              ((.session_duration//3600)|tostring)
             ]|join(" ")' "${_rapture[config]}" )"
 
     _rapture[managed_vars]="AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SECURITY_TOKEN RAPTURE_ROLE RAPTURE_ASSUMED_ROLE_ARN"
@@ -154,6 +156,7 @@ _rapture_api_sts_assume_role() {
         aws sts assume-role \
             --role-arn "${_rapture[assume_role_arn]}" \
             --role-session-name "rapture-${_rapture[identifier]}" \
+            --duration-seconds "${_rapture[session_duration]}" \
             ${_rapture[aws_cli_args]} \
             2>/dev/null
     )
@@ -643,4 +646,3 @@ rapture() {
             ;;
     esac
 }
-
