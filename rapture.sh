@@ -15,14 +15,14 @@ if (( ${BASH_VERSION:0:1} < 4 )); then
     return
 fi
 
-declare -A _rapture
-declare -a _rapture_creds_stack
-declare -a _rapture_arn_stack
-declare -a _rapture_failures
-declare -A _rapture_alias
-declare -A _rapture_account
-declare -A _rapture_alias_r
-declare -A _rapture_account_r
+declare -gA _rapture
+declare -ga _rapture_creds_stack
+declare -ga _rapture_arn_stack
+declare -ga _rapture_failures
+declare -gA _rapture_alias
+declare -gA _rapture_account
+declare -gA _rapture_alias_r
+declare -gA _rapture_account_r
 
 _rapture_quiet() { [[ ${_rapture[quiet]} == true ]]; }
 
