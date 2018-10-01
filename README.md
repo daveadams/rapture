@@ -51,7 +51,7 @@ Then configure your shell to load Rapture at start:
 Finally, open a new terminal window to verify that Rapture is automatically loaded:
 
     $ rapture version
-    Rapture 1.0.0
+    Rapture 1.2.1
 
 
 ## Configuration

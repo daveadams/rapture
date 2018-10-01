@@ -49,7 +49,7 @@ _rapture_explain_failure() {
 }
 
 _rapture_load_config() {
-    _rapture[VERSION]=1.2.0
+    _rapture[VERSION]=1.2.1
     _rapture[srcdir]=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
     _rapture[rootdir]="${RAPTURE_ROOT:-${_rapture[srcdir]}}"
     _rapture[sp]="${_rapture[sp]:-0}"
@@ -621,8 +621,14 @@ _rapture_cmd_version() {
 }
 
 _rapture_cmd_init() {
+    if ! aws --version &>/dev/null; then
+        _rapture_err "The 'aws' CLI tool is not properly installed. Try 'pip install awscli' or activate your virtualenv."
+        return 127
+    fi
+
     if ! which vaulted &>/dev/null; then
         _rapture_err "'vaulted' was not found in your path. Install it with 'go get github.com/miquella/vaulted'."
+        return 127
     fi
 
     echo "Initializing vaulted env '$1':"
