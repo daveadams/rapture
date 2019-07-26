@@ -1,3 +1,9 @@
+**NOTE**: This version of rapture is no longer supported. I've written a new
+Golang version which adds more features, integrates into more shells, and runs
+much faster. Check it out at https://github.com/daveadams/go-rapture.
+
+---
+
 # rapture
 
 Rapture is a bash CLI tool for managing and switching between AWS IAM roles.
